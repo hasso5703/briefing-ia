@@ -34,7 +34,9 @@ if not key or not to:
     sys.exit(2)
 
 date = subprocess.check_output(["date", "+%Y-%m-%d"]).decode().strip()
-subject = os.environ.get("RESEND_SUBJECT", "📰 Briefing IA · " + date)
+hour = int(subprocess.check_output(["date", "-u", "+%H"]).decode().strip())
+slot = "matin" if hour < 8 else ("midi" if hour < 15 else "soir")
+subject = os.environ.get("RESEND_SUBJECT", "📰 Briefing IA · %s · %s" % (slot, date))
 
 with open(path, encoding="utf-8") as f:
     html = f.read()

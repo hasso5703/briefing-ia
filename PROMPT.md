@@ -153,6 +153,11 @@ identique chaque jour.
 2. Écris `/tmp/content.json`, JSON valide en UTF-8, strictement conforme à ce schéma.
 
 Règles de contenu :
+- `date_long` = la date du jour (ex : « Jeudi 18 juin 2026 »). `edition` selon l'heure UTC du run
+  (lance `date -u +%H`) : si < 8 → « Édition du matin » ; si 8 à 14 → « Édition de midi » ;
+  si ≥ 15 → « Édition du soir ». La routine se déclenche 3 fois par jour (~04, ~10 et ~18 UTC).
+  Adapte aussi le ton du chapô à l'heure (une édition du matin ouvre la journée, celle du soir la
+  clôt).
 - Ordonne les `sections` par IMPACT (cf. Phase 5). Coupures et bans en premier.
 - `status` rigoureux (`ok` / `warn` / `no`), appliqué APRÈS la vérification et l'escalade de
   l'Étape 1.
