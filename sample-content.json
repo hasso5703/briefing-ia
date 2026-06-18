@@ -1,0 +1,116 @@
+{
+  "date_long": "Jeudi 18 juin 2026",
+  "edition": "Édition du soir",
+  "intro": "Journée dominée par les retombées de la coupure des deux modèles les plus puissants d'Anthropic, qui éclipse le G7 d'Évian et relance le débat sur le bouton d'arrêt américain. En parallèle, SpaceX absorbe Cursor et l'infrastructure du code mondial ploie sous les agents IA.",
+  "sections": [
+    {
+      "rank": "01",
+      "kicker": "impact maximal",
+      "title": "Coupure de service & régulation",
+      "items": [
+        {
+          "title": "Anthropic : Fable 5 et Mythos 5 toujours hors ligne dans le monde entier",
+          "status": "ok",
+          "dateline": "Événement : 12 juin (17h21 ET) · point au 18 juin",
+          "body": "Sur injonction du Département du Commerce (signature du secrétaire Howard Lutnick), Anthropic a suspendu l'accès à ses deux modèles de pointe pour tout ressortissant étranger, y compris ses propres salariés non américains. Faute de pouvoir filtrer en temps réel, l'entreprise les a désactivés pour tout le monde. Motif invoqué : une technique de jailbreak exposant les capacités cyber offensives du modèle sous-jacent Mythos. Les modèles Claude moins puissants (dont Opus 4.8) ne sont pas touchés.",
+          "sources": [
+            {"name": "Anthropic", "url": "https://www.anthropic.com/news/fable-mythos-access"},
+            {"name": "Reuters", "url": "https://www.reuters.com/technology/"},
+            {"name": "Washington Post", "url": "https://www.washingtonpost.com"},
+            {"name": "TechCrunch", "url": "https://techcrunch.com"}
+          ]
+        },
+        {
+          "title": "Panne mondiale de Claude ce matin, rétablie en 45 minutes",
+          "status": "ok",
+          "dateline": "Événement : 18 juin, 06h55 à 07h40 UTC",
+          "body": "Incident distinct de l'affaire export : Claude.ai, l'API et Claude Code ont connu des erreurs (chats qui ne chargent pas, prompts en échec). Cause identifiée et incident résolu en une quarantaine de minutes. Un mois agité côté fiabilité.",
+          "sources": [
+            {"name": "status.claude.com", "url": "https://status.claude.com"},
+            {"name": "Analytics Insight", "url": "https://www.analyticsinsight.net"}
+          ]
+        }
+      ]
+    },
+    {
+      "rank": "02",
+      "kicker": "gouvernance",
+      "title": "Le G7 d'Évian",
+      "items": [
+        {
+          "title": "Les patrons de l'IA au G7, un sommet rattrapé par le kill switch américain",
+          "status": "ok",
+          "dateline": "Événement : 52e sommet du G7, Évian, 15 au 17 juin",
+          "body": "Pour la première fois, une douzaine de dirigeants de l'IA (Altman, Amodei, Hassabis) ont rejoint les chefs d'État autour d'un déjeuner de travail, plaidant pour une coalition menée par les États-Unis. L'autre lecture : les Européens sont arrivés ébranlés par la coupure d'Anthropic, vue comme la preuve d'un bouton d'arrêt actionnable depuis Washington. Peu de livrables concrets, l'IA figurant surtout dans une déclaration sur la protection des mineurs en ligne.",
+          "sources": [
+            {"name": "CNBC", "url": "https://www.cnbc.com"},
+            {"name": "France 24", "url": "https://www.france24.com"},
+            {"name": "Conseil européen", "url": "https://www.consilium.europa.eu"}
+          ]
+        }
+      ]
+    },
+    {
+      "rank": "03",
+      "kicker": "financement & M&A",
+      "title": "Capital, IPO, acquisitions",
+      "items": [
+        {
+          "title": "SpaceX rachète Cursor (Anysphere) pour 60 Md$ en actions",
+          "status": "ok",
+          "dateline": "Événement : accord le 16 juin · clôture visée T3 2026",
+          "body": "Quelques jours après son IPO record, SpaceX (fusionnée avec xAI en février) absorbe l'éditeur de l'outil de code le plus utilisé par les développeurs. Transaction 100 pour cent en actions. Le deal vise à combler le retard de SpaceX/xAI face aux outils de code d'Anthropic et OpenAI.",
+          "sources": [
+            {"name": "CNBC", "url": "https://www.cnbc.com"},
+            {"name": "Forbes", "url": "https://www.forbes.com"},
+            {"name": "Axios", "url": "https://www.axios.com"}
+          ]
+        },
+        {
+          "title": "Mistral en discussion pour lever ~3 Md€ à une valo d'environ 20 Md€",
+          "status": "warn",
+          "dateline": "Événement : révélé le 12 juin · stade précoce",
+          "body": "Profitant de l'élan souveraineté, le français Mistral serait en pourparlers pour un tour d'environ 3 Md€. À ne pas confondre : les 11,7 Md€ parfois cités correspondent à la valorisation précédente (Series C, septembre 2025) ; le nouveau tour la doublerait quasiment. Discussions early stage, rien de communiqué officiellement.",
+          "sources": [
+            {"name": "Bloomberg", "url": "https://www.bloomberg.com"},
+            {"name": "TechCrunch", "url": "https://techcrunch.com"}
+          ]
+        }
+      ]
+    },
+    {
+      "rank": "04",
+      "kicker": "infrastructure",
+      "title": "Tuyaux & capacité",
+      "items": [
+        {
+          "title": "Submergé par les agents IA, GitHub bascule du trafic vers AWS",
+          "status": "ok",
+          "dateline": "Événement : confirmé le 16 juin",
+          "body": "Microsoft confirme router une partie du trafic de GitHub vers Amazon Web Services, son rival cloud, la demande des agents de code ayant dépassé les seuils de fiabilité contractuels. Les chiffres précis qui circulent varient selon les médias et restent à consolider, mais le recours à AWS, lui, est confirmé.",
+          "sources": [
+            {"name": "Windows Central", "url": "https://www.windowscentral.com"},
+            {"name": "TechTimes", "url": "https://www.techtimes.com"}
+          ]
+        }
+      ]
+    }
+  ],
+  "signaux": [
+    {
+      "title": "GPT-5.6 attendu fin juin ?",
+      "status": "warn",
+      "body": "Aucune annonce officielle. Indices : une entrée gpt-5.6 fugitivement apparue dans des logs Codex, des paris (Polymarket) autour de 80 pour cent d'ici le 30 juin. À valider si OpenAI publie des specs."
+    },
+    {
+      "title": "Vague de modèles avant fin juin",
+      "status": "warn",
+      "body": "Gemini 3.5 Pro (Google) et Claude Sonnet 4.8 (Anthropic) sont cités comme attendus avant la fin du mois par plusieurs trackers ; rien d'officiellement daté. À surveiller : une page produit ou un billet officiel."
+    }
+  ],
+  "enbref": [
+    {"lead": "IPO record.", "text": "SpaceX a fait ses débuts en Bourse le 12 juin, plus grosse introduction de l'histoire selon plusieurs sources."},
+    {"lead": "Open weight.", "text": "Dans la foulée de la coupure d'Anthropic, Arthur Mensch (Mistral) remet en avant des modèles qu'aucun gouvernement étranger ne peut éteindre."},
+    {"lead": "Cadre US.", "text": "L'executive order du 2 juin privilégie des engagements volontaires plutôt qu'un régime de licences obligatoires."}
+  ]
+}

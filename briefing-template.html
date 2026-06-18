@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>Briefing IA</title>
+<style>
+  * { box-sizing:border-box; }
+  body { margin:0; padding:0; background:#EFEDE7; -webkit-text-size-adjust:100%; }
+  a { color:#17150F; text-decoration:none; border-bottom:1px solid #C9C4B7; }
+  .frame { background:#EFEDE7; }
+  .frame-pad { padding:30px 14px; }
+  .paper { width:100%; max-width:600px; background:#FAF9F7; }
+
+  .rule-top { height:5px; background:#17150F; font-size:0; line-height:0; }
+  .masthead { padding:36px 38px 0 38px; }
+  .kicker { font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-size:10.5px; letter-spacing:0.26em; text-transform:uppercase; color:#8A8678; margin:0 0 16px 0; }
+  .wordmark { font-family:Georgia,"Times New Roman",serif; font-weight:700; font-size:44px; line-height:0.98; letter-spacing:-0.015em; color:#17150F; margin:0; }
+  .dateline { font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-size:12px; letter-spacing:0.05em; color:#6E6A5E; margin:16px 0 0 0; }
+  .rule-double { border-top:2px solid #17150F; border-bottom:1px solid #17150F; height:3px; margin:18px 38px 0 38px; font-size:0; line-height:0; }
+
+  .standfirst { font-family:Georgia,serif; font-style:italic; font-size:17px; line-height:1.52; color:#2A2820; padding:24px 38px 0 38px; margin:0; }
+
+  .legend { padding:20px 38px 0 38px; }
+  .legend span.badge { margin:0 10px 0 0; }
+  .legend small { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:10px; color:#8A8678; letter-spacing:0.04em; }
+
+  .section { padding:34px 38px 0 38px; }
+  .eyebrow { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:#8A8678; margin:0 0 6px 0; }
+  .eyebrow b { color:#17150F; font-weight:700; }
+  .sec-title { font-family:Georgia,serif; font-weight:700; font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:#17150F; margin:0; padding-bottom:11px; border-bottom:1.5px solid #17150F; }
+
+  .item { padding-top:22px; }
+  .item-title { font-family:Georgia,serif; font-weight:700; font-size:20px; line-height:1.27; color:#17150F; margin:0 0 11px 0; }
+  .badge { display:inline-block; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:10.5px; font-weight:700; letter-spacing:0.05em; padding:3px 8px; border-radius:3px; white-space:nowrap; }
+  .b-ok   { color:#2E7D4F; background:#E7F0EA; }
+  .b-warn { color:#9C6B16; background:#F5EAD2; }
+  .b-no   { color:#B23A33; background:#F6E3E1; }
+  .meta { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:11px; letter-spacing:0.02em; color:#6E6A5E; margin:0 0 11px 0; }
+  .meta .badge { margin-right:10px; }
+  .body { font-family:-apple-system,"Helvetica Neue",Arial,sans-serif; font-size:15px; line-height:1.62; color:#2C2A22; margin:0 0 11px 0; }
+  .sources { font-family:-apple-system,Arial,sans-serif; font-size:12px; line-height:1.55; color:#6E6A5E; margin:0; }
+  .sources .lbl { font-family:ui-monospace,Menlo,Consolas,monospace; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; font-size:9.5px; color:#17150F; margin-right:6px; }
+  .item-div { border-top:1px solid #E3DFD6; margin-top:24px; font-size:0; line-height:0; }
+
+  .weak { margin:38px 0 0 0; background:#F1EFE7; border-top:1.5px solid #17150F; border-bottom:1.5px solid #17150F; padding-bottom:28px; }
+  .weak .section { padding-top:26px; }
+  .weak-item { padding:16px 38px 0 38px; }
+  .weak-item .wt { font-family:Georgia,serif; font-weight:700; font-size:15px; color:#17150F; }
+  .weak-item .wbadge { margin-left:6px; }
+  .weak-item .wb { font-family:-apple-system,Arial,sans-serif; font-size:13.5px; line-height:1.56; color:#3A382F; margin:6px 0 0 0; }
+
+  .brief { padding-top:6px; }
+  .brief-li { padding:13px 38px 0 38px; }
+  .brief-li .mk { font-family:ui-monospace,Menlo,Consolas,monospace; color:#17150F; font-size:13px; font-weight:700; padding-right:13px; vertical-align:top; line-height:1.55; }
+  .brief-li .tx { font-family:-apple-system,Arial,sans-serif; font-size:13.5px; line-height:1.56; color:#2C2A22; }
+  .brief-li .tx b { color:#17150F; }
+
+  .footer { padding:32px 38px 38px 38px; margin-top:36px; border-top:5px solid #17150F; }
+  .footer p { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:10px; line-height:1.75; letter-spacing:0.02em; color:#9A9587; margin:0 0 9px 0; }
+  .footer .sig { color:#6E6A5E; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; }
+
+  @media only screen and (max-width:480px) {
+    .masthead, .standfirst, .legend, .section, .weak-item, .brief-li, .footer { padding-left:22px !important; padding-right:22px !important; }
+    .rule-double { margin-left:22px !important; margin-right:22px !important; }
+    .wordmark { font-size:34px !important; }
+    .item-title { font-size:18px !important; }
+  }
+</style>
+</head>
+<body>
+<table role="presentation" class="frame" width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td class="frame-pad" align="center">
+<table role="presentation" class="paper" align="center" cellpadding="0" cellspacing="0" border="0">
+<tr><td style="padding:0;">
+    <div class="rule-top">&nbsp;</div>
+
+    <div class="masthead">
+      <p class="kicker">Veille IA &middot; v&eacute;rifi&eacute;e &middot; hi&eacute;rarchis&eacute;e par impact</p>
+      <p class="wordmark">Briefing&nbsp;IA</p>
+      <p class="dateline">JEUDI 18 JUIN 2026 &middot; &Eacute;DITION DU SOIR</p>
+    </div>
+    <div class="rule-double">&nbsp;</div>
+
+    <p class="standfirst">Journ&eacute;e domin&eacute;e par les retomb&eacute;es de la coupure des deux mod&egrave;les les plus puissants d'Anthropic, qui &eacute;clipse le G7 d'&Eacute;vian et relance le d&eacute;bat sur le bouton d'arr&ecirc;t am&eacute;ricain. En parall&egrave;le, SpaceX absorbe Cursor et l'infrastructure du code mondial ploie sous les agents IA.</p>
+
+    <div class="legend">
+      <span class="badge b-ok">&#9989; RECOUP&Eacute;</span><span class="badge b-warn">&#9888;&#65039; &Agrave; CONFIRMER</span><span class="badge b-no">&#10060; NON V&Eacute;RIFI&Eacute;</span>
+      <br><br><small>&#9989; &ge;3 sources ou primaire &nbsp;&middot;&nbsp; &#9888;&#65039; source unique &nbsp;&middot;&nbsp; &#10060; non recoup&eacute;</small>
+    </div>
+
+    <!-- ===== SECTION ===== -->
+    <div class="section">
+      <p class="eyebrow"><b>01</b> &middot; impact maximal</p>
+      <p class="sec-title">Coupure de service &amp; r&eacute;gulation</p>
+
+      <div class="item">
+        <p class="item-title">Anthropic : Fable 5 et Mythos 5 toujours hors ligne dans le monde entier</p>
+        <p class="meta"><span class="badge b-ok">&#9989; RECOUP&Eacute;</span> &Eacute;V&Eacute;NEMENT : 12 JUIN (17H21 ET) &middot; POINT AU 18 JUIN</p>
+        <p class="body">Sur injonction du D&eacute;partement du Commerce (signature du secr&eacute;taire Howard Lutnick), Anthropic a suspendu l'acc&egrave;s &agrave; ses deux mod&egrave;les de pointe pour tout ressortissant &eacute;tranger, y compris ses propres salari&eacute;s non am&eacute;ricains. Faute de pouvoir filtrer en temps r&eacute;el, l'entreprise les a d&eacute;sactiv&eacute;s pour tout le monde. Motif invoqu&eacute; : une technique de jailbreak exposant les capacit&eacute;s cyber offensives du mod&egrave;le sous-jacent Mythos. Les mod&egrave;les Claude moins puissants (dont Opus 4.8) ne sont pas touch&eacute;s.</p>
+        <p class="sources"><span class="lbl">Sources</span> <a href="#">Anthropic</a>, <a href="#">Reuters</a>, <a href="#">Washington Post</a>, <a href="#">TechCrunch</a></p>
+        <div class="item-div">&nbsp;</div>
+      </div>
+
+      <div class="item">
+        <p class="item-title">Panne mondiale de Claude ce matin, r&eacute;tablie en 45 minutes</p>
+        <p class="meta"><span class="badge b-ok">&#9989; RECOUP&Eacute;</span> &Eacute;V&Eacute;NEMENT : 18 JUIN, 06H55 &rarr; 07H40 UTC</p>
+        <p class="body">Incident distinct de l'affaire export : Claude.ai, l'API et Claude Code ont connu des erreurs (chats qui ne chargent pas, prompts en &eacute;chec). Cause identifi&eacute;e et incident r&eacute;solu en une quarantaine de minutes. Un mois agit&eacute; c&ocirc;t&eacute; fiabilit&eacute;.</p>
+        <p class="sources"><span class="lbl">Sources</span> <a href="#">status.claude.com</a>, <a href="#">Analytics Insight</a></p>
+      </div>
+    </div>
+
+    <!-- ===== SECTION ===== -->
+    <div class="section">
+      <p class="eyebrow"><b>02</b> &middot; gouvernance</p>
+      <p class="sec-title">Le G7 d'&Eacute;vian</p>
+
+      <div class="item">
+        <p class="item-title">Les patrons de l'IA au G7, un sommet rattrap&eacute; par le kill switch am&eacute;ricain</p>
+        <p class="meta"><span class="badge b-ok">&#9989; RECOUP&Eacute;</span> &Eacute;V&Eacute;NEMENT : 52E SOMMET DU G7, &Eacute;VIAN, 15 AU 17 JUIN</p>
+        <p class="body">Pour la premi&egrave;re fois, une douzaine de dirigeants de l'IA (Altman, Amodei, Hassabis) ont rejoint les chefs d'&Eacute;tat autour d'un d&eacute;jeuner de travail, plaidant pour une coalition men&eacute;e par les &Eacute;tats-Unis. L'autre lecture : les Europ&eacute;ens sont arriv&eacute;s &eacute;branl&eacute;s par la coupure d'Anthropic, vue comme la preuve d'un bouton d'arr&ecirc;t actionnable depuis Washington. Peu de livrables concrets, l'IA figurant surtout dans une d&eacute;claration sur la protection des mineurs en ligne.</p>
+        <p class="sources"><span class="lbl">Sources</span> <a href="#">CNBC</a>, <a href="#">France 24</a>, <a href="#">Conseil europ&eacute;en</a></p>
+      </div>
+    </div>
+
+    <!-- ===== SECTION ===== -->
+    <div class="section">
+      <p class="eyebrow"><b>03</b> &middot; financement &amp; M&amp;A</p>
+      <p class="sec-title">Capital, IPO, acquisitions</p>
+
+      <div class="item">
+        <p class="item-title">SpaceX rach&egrave;te Cursor (Anysphere) pour 60 Md$ en actions</p>
+        <p class="meta"><span class="badge b-ok">&#9989; RECOUP&Eacute;</span> &Eacute;V&Eacute;NEMENT : ACCORD LE 16 JUIN &middot; CL&Ocirc;TURE VIS&Eacute;E T3 2026</p>
+        <p class="body">Quelques jours apr&egrave;s son IPO record, SpaceX (fusionn&eacute;e avec xAI en f&eacute;vrier) absorbe l'&eacute;diteur de l'outil de code le plus utilis&eacute; par les d&eacute;veloppeurs. Transaction 100 pour cent en actions. Le deal vise &agrave; combler le retard de SpaceX/xAI face aux outils de code d'Anthropic et OpenAI.</p>
+        <p class="sources"><span class="lbl">Sources</span> <a href="#">CNBC</a>, <a href="#">Forbes</a>, <a href="#">Axios</a></p>
+        <div class="item-div">&nbsp;</div>
+      </div>
+
+      <div class="item">
+        <p class="item-title">Mistral en discussion pour lever ~3 Md&euro; &agrave; une valo d'environ 20 Md&euro;</p>
+        <p class="meta"><span class="badge b-warn">&#9888;&#65039; &Agrave; CONFIRMER</span> &Eacute;V&Eacute;NEMENT : R&Eacute;V&Eacute;L&Eacute; LE 12 JUIN &middot; STADE PR&Eacute;COCE</p>
+        <p class="body">Profitant de l'&eacute;lan souverainet&eacute;, le fran&ccedil;ais Mistral serait en pourparlers pour un tour d'environ 3 Md&euro;. &Agrave; ne pas confondre : les 11,7 Md&euro; parfois cit&eacute;s correspondent &agrave; la valorisation pr&eacute;c&eacute;dente (Series C, septembre 2025) ; le nouveau tour la doublerait quasiment. Discussions early stage, rien de communiqu&eacute; officiellement.</p>
+        <p class="sources"><span class="lbl">Sources</span> <a href="#">Bloomberg</a>, <a href="#">TechCrunch</a></p>
+      </div>
+    </div>
+
+    <!-- ===== SECTION ===== -->
+    <div class="section">
+      <p class="eyebrow"><b>04</b> &middot; infrastructure</p>
+      <p class="sec-title">Tuyaux &amp; capacit&eacute;</p>
+
+      <div class="item">
+        <p class="item-title">Submerg&eacute; par les agents IA, GitHub bascule du trafic vers AWS</p>
+        <p class="meta"><span class="badge b-ok">&#9989; RECOUP&Eacute;</span> &Eacute;V&Eacute;NEMENT : CONFIRM&Eacute; LE 16 JUIN</p>
+        <p class="body">Microsoft confirme router une partie du trafic de GitHub vers Amazon Web Services, son rival cloud, la demande des agents de code ayant d&eacute;pass&eacute; les seuils de fiabilit&eacute; contractuels. Les chiffres pr&eacute;cis qui circulent varient selon les m&eacute;dias et restent &agrave; consolider, mais le recours &agrave; AWS, lui, est confirm&eacute;.</p>
+        <p class="sources"><span class="lbl">Sources</span> <a href="#">Windows Central</a>, <a href="#">TechTimes</a></p>
+      </div>
+    </div>
+
+    <!-- ===== SIGNAUX FAIBLES ===== -->
+    <div class="weak">
+      <div class="section">
+        <p class="eyebrow"><b>&#128269;</b> &middot; non officiel</p>
+        <p class="sec-title">Signaux faibles &middot; &agrave; surveiller</p>
+      </div>
+      <div class="weak-item">
+        <span class="wt">GPT-5.6 attendu fin juin ?</span><span class="badge b-warn wbadge">&#9888;&#65039;</span>
+        <p class="wb">Aucune annonce officielle. Indices : une entr&eacute;e gpt-5.6 fugitivement apparue dans des logs Codex, des paris (Polymarket) autour de 80 pour cent d'ici le 30 juin. &Agrave; valider si OpenAI publie des specs.</p>
+      </div>
+      <div class="weak-item">
+        <span class="wt">Vague de mod&egrave;les avant fin juin</span><span class="badge b-warn wbadge">&#9888;&#65039;</span>
+        <p class="wb">Gemini 3.5 Pro (Google) et Claude Sonnet 4.8 (Anthropic) sont cit&eacute;s comme attendus avant la fin du mois par plusieurs trackers ; rien d'officiellement dat&eacute;. &Agrave; surveiller : une page produit ou un billet officiel.</p>
+      </div>
+    </div>
+
+    <!-- ===== EN BREF ===== -->
+    <div class="section brief">
+      <p class="eyebrow"><b>+</b> &middot; le reste</p>
+      <p class="sec-title">En bref</p>
+      <div class="brief-li"><table role="presentation" cellpadding="0" cellspacing="0"><tr><td class="mk">&rarr;</td><td class="tx"><b>IPO record.</b> SpaceX a fait ses d&eacute;buts en Bourse le 12 juin, plus grosse introduction de l'histoire selon plusieurs sources.</td></tr></table></div>
+      <div class="brief-li"><table role="presentation" cellpadding="0" cellspacing="0"><tr><td class="mk">&rarr;</td><td class="tx"><b>Open weight.</b> Dans la foul&eacute;e de la coupure d'Anthropic, Arthur Mensch (Mistral) remet en avant des mod&egrave;les qu'aucun gouvernement &eacute;tranger ne peut &eacute;teindre.</td></tr></table></div>
+      <div class="brief-li"><table role="presentation" cellpadding="0" cellspacing="0"><tr><td class="mk">&rarr;</td><td class="tx"><b>Cadre US.</b> L'executive order du 2 juin privil&eacute;gie des engagements volontaires plut&ocirc;t qu'un r&eacute;gime de licences obligatoires.</td></tr></table></div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <div class="footer">
+      <p class="sig">Briefing IA</p>
+      <p>G&eacute;n&eacute;r&eacute; automatiquement. Sources v&eacute;rifi&eacute;es et recoup&eacute;es, hi&eacute;rarchis&eacute;es par impact. Les dates sont celles des &eacute;v&eacute;nements, pas des publications.</p>
+      <p>Les tags &#9888;&#65039; et &#10060; signalent une information non confirm&eacute;e par une source primaire : ne pas les traiter comme des faits &eacute;tablis. Les montants financiers restent prudents tant qu'ils ne sont pas confirm&eacute;s par un d&eacute;p&ocirc;t officiel.</p>
+    </div>
+
+</td></tr></table>
+</td></tr></table>
+</body>
+</html>
