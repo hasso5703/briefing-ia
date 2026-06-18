@@ -101,6 +101,28 @@ chiffre financier reste prudent (`warn`) tant qu'il n'est pas confirmé par
 Reuters/CNBC/Bloomberg/SEC/source primaire, mais SEULEMENT après l'escalade ci-dessus ; shutdown,
 ban et disabled en tête, jamais noyés ; signaler explicitement les informations manquantes.
 
+**COHÉRENCE TEMPORELLE (OBLIGATOIRE).** Avant d'inclure un fait, vérifie qu'il est ENCORE VRAI à la
+date du briefing, pas seulement qu'il a été annoncé un jour donné. Deux pièges à éliminer :
+- Un événement récent peut ANNULER un fait plus ancien. Si une coupure, un ban, un retrait ou une
+  acquisition vient d'avoir lieu, demande-toi quelles annonces antérieures il invalide, et vérifie-le
+  par une recherche dédiée. Contre-modèle à NE PLUS reproduire : présenter « les banques japonaises
+  vont accéder à Mythos » (annoncé mi-mai 2026) comme un fait courant le 18 juin, alors que le ban du
+  12 juin suspend Mythos pour TOUS les ressortissants étrangers, banques japonaises incluses : le ban
+  a annulé cette annonce. Ne construis JAMAIS un « paradoxe » ou un contraste en juxtaposant des
+  faits de dates différentes sans avoir vérifié qu'ils coexistent ENCORE aujourd'hui.
+- Ancre chaque brève à la VRAIE date de l'événement, vérifiée sur la source primaire. Ne devine
+  jamais une date : une annonce de mai ne devient pas « début juin ».
+
+**DÉCOMPTE « JOUR N » (OBLIGATOIRE).** Si tu écris « Nᵉ jour » d'une crise, RECALCULE N à partir de
+la date de l'événement déclencheur jusqu'à la date du briefing et vérifie l'arithmétique. En cas de
+doute sur la convention (jour 0 ou jour 1 ?), donne la date (« depuis le 12 juin ») plutôt qu'un
+numéro de jour potentiellement faux, et ne mets jamais deux décomptes contradictoires.
+
+**CHIFFRES DIVERGENTS (OBLIGATOIRE).** Si les sources ne s'accordent pas sur un chiffre
+(valorisation, ARR, montant, pourcentage, date), ce chiffre passe en `warn`, jamais `ok`. Donne la
+fourchette ou les deux valeurs avec leurs sources ; ne tranche jamais arbitrairement pour une seule
+valeur que tu présenterais comme recoupée.
+
 **Phase 5, hiérarchisation par IMPACT (pas par ordre d'apparition).**
 1. Coupure de service / retrait de produit ; 2. Régulation gouvernementale / bans / export
 controls ; 3. IPO / financement massif / faillite ; 4. Lancement de modèle / produit majeur ;
@@ -113,7 +135,10 @@ au moins 3 recherches ciblées par événement ? recherche de contradiction fait
 (2 à 3 recherches de plus) sur CHAQUE chiffre important avant de le figer, en le datant ? ai-je
 creusé les événements riches sous plusieurs angles (4+ recherches) ? ai-je une section signaux
 faibles réellement alimentée par des recherches dédiées ? sources secondaires non présentées comme
-primaires ?
+primaires ? chaque brève est-elle ancrée à la VRAIE date de l'événement (pas une date devinée) ?
+un événement récent (ban, coupure, acquisition) annule-t-il une annonce antérieure que j'allais
+inclure ? les « jour N » sont-ils recalculés et cohérents ? tout chiffre sur lequel les sources
+divergent est-il en `warn` avec sa fourchette, et non en `ok` ?
 
 ---
 
