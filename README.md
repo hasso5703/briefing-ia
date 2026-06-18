@@ -7,10 +7,19 @@ Le but : **figer le template hors du prompt**. Le shell HTML, le CSS et la struc
 vivent dans `render.py`. L'agent ne produit **que des données** (`content.json`) ;
 il ne génère jamais de HTML. Résultat : un rendu identique à chaque exécution (zéro drift).
 
+## Fichiers
+
+- **`PROMPT.md`** : le protocole complet exécuté par l'agent cloud (recherche, contenu, rendu, envoi). La routine se contente de dire « lis PROMPT.md et exécute ».
+- **`render.py`** : le builder figé (shell + CSS + structure). Données → HTML.
+- **`send.py`** : envoi via Resend (clé et destinataires lus dans l'environnement, aucun secret en dur).
+- **`sample-content.json`** : exemple de données complet.
+- **`briefing-template.html`** : rendu de référence figé (design).
+
 ## Usage
 
 ```bash
 python3 render.py content.json > newsletter.html
+RESEND_API_KEY=re_xxx RESEND_TO=a@b.com python3 send.py
 ```
 
 Aucune dépendance (stdlib uniquement). Testé avec `sample-content.json`.
