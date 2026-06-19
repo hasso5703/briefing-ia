@@ -55,7 +55,11 @@ payload = json.dumps({
 req = urllib.request.Request(
     "https://api.resend.com/emails",
     data=payload,
-    headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"},
+    headers={
+        "Authorization": "Bearer " + key,
+        "Content-Type": "application/json",
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) BriefingIA/1.0",
+    },
     method="POST",
 )
 
