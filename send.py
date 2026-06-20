@@ -20,6 +20,8 @@ Variables :
 import os
 import sys
 import json
+import time
+import socket
 import subprocess
 import urllib.request
 import urllib.error
@@ -63,11 +65,30 @@ req = urllib.request.Request(
     method="POST",
 )
 
-try:
-    with urllib.request.urlopen(req) as r:
-        body = r.read().decode()
-        mid = json.loads(body).get("id", "?")
-        print("OK %s | Newsletter envoyée à : %s (id %s)" % (r.status, ", ".join(to), mid))
-except urllib.error.HTTPError as e:
-    print("ERREUR HTTP %s : %s" % (e.code, e.read().decode()), file=sys.stderr)
-    sys.exit(1)
+# Retry avec backoff exponentiel (Resend rate limit / instabilité réseau)
+max_retries = 3
+for attempt in range(max_retries):
+    try:
+        with urllib.request.urlopen(req) as r:
+            body = r.read().decode()
+            mid = json.loads(body).get("id", "?")
+            print("OK %s | Newsletter envoyée à : %s (id %s)" % (r.status, ", ".join(to), mid))
+            sys.exit(0)
+    except urllib.error.HTTPError as e:
+        code = e.code
+        err_msg = e.read().decode()
+        if code in (429, 500, 502, 503, 504) and attempt < max_retries - 1:
+            wait = 2 ** attempt
+            print("ERREUR HTTP %s (tentative %d/%d). Retry dans %ds..." % (code, attempt + 1, max_retries, wait), file=sys.stderr)
+            time.sleep(wait)
+        else:
+            print("ERREUR HTTP %s : %s" % (code, err_msg), file=sys.stderr)
+            sys.exit(1)
+    except (urllib.error.URLError, socket.timeout, OSError) as e:
+        if attempt < max_retries - 1:
+            wait = 2 ** attempt
+            print("ERREUR RESEAU (%s) (tentative %d/%d). Retry dans %ds..." % (e.reason, attempt + 1, max_retries, wait), file=sys.stderr)
+            time.sleep(wait)
+        else:
+            print("ERREUR RESEAU (%s) après %d tentatives." % (e.reason, max_retries), file=sys.stderr)
+            sys.exit(1)

@@ -14,6 +14,16 @@ Read. Tu n'as PAS d'outil MCP de recherche : utilise WebSearch (natif) et WebFet
 
 ---
 
+## Préambule : pré-flight
+
+Avant toute recherche, lance :
+```bash
+cd /home/hasan/briefing-ia && git pull --ff-only 2>&1 || echo "WARNING: git pull échoué, continuation..."
+```
+Si le repo est corrompu ou `render.py`/`send.py` manquants, arrête et signale l'erreur.
+
+---
+
 ## Principe directeur : journaliste d'investigation, pas agrégateur
 
 Ta valeur n'est pas de recopier des titres, c'est de CREUSER. Trois réflexes non négociables :
@@ -171,7 +181,15 @@ Règles de contenu :
 
 ---
 
-## Étape 2bis, rendre le HTML (builder figé)
+## Étape 2bis, validation JSON (OBLIGATOIRE)
+
+Avant de rendre le HTML, valide le JSON avec le script fourni :
+```bash
+cd /home/hasan/briefing-ia && python3 validate-content.py /tmp/content.json
+```
+Si validation échoue → corrige `/tmp/content.json` et relance. NE PAS continuer vers render.py.
+
+## Étape 2ter, rendre le HTML (builder figé)
 
 Localise `render.py` (racine du repo ; sinon `find . -name render.py`). Puis :
 
@@ -198,6 +216,16 @@ RESEND_API_KEY=<clé fournie> RESEND_TO=<destinataires fournis> python3 send.py
 Succès = une ligne `OK 200 | Newsletter envoyée à : ... (id ...)`. En cas d'erreur 4xx/5xx, affiche
 la réponse complète, corrige (souvent un souci de contenu HTML) et réessaie UNE fois. Termine ton
 run par la ligne de confirmation (avec l'id) en cas de succès, ou l'erreur exacte sinon.
+
+---
+
+## Étape 4, archivage (OBLIGATOIRE après succès)
+
+Après un envoi réussi, archive le contenu et le HTML dans le repo pour conservation et traçabilité :
+```bash
+cd /home/hasan/briefing-ia && bash archive-briefing.sh
+```
+Cela crée un répertoire `archives/YYYY-MM-DD/` avec `content.json` et `newsletter.html`, et fait un `git commit`.
 
 Note : l'expéditeur de test `onboarding@resend.dev` ne peut écrire qu'à `basbunarhasan@gmail.com`.
 Pour d'autres destinataires, il faudra d'abord vérifier un domaine dans Resend puis changer
